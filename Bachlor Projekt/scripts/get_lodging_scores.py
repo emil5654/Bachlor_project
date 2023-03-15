@@ -9,7 +9,7 @@ def get_labels():
     bin_size = 5
     #create labels, [ROI, Visual SCORE, FLIGHTFolder]
     for i in range(scores.shape[0]):
-        labels.append((scores[i,2], scores[i, 4], scores[i,6], create_bin(bin_size, scores[i,4])))
+        labels.append((scores[i,2], scores[i, 4], scores[i,6], create_bin(bin_size, scores[i,4])-1))
     return labels
 
 def create_bin(bin_size, vision_score):
