@@ -1,6 +1,7 @@
 import glob
 import numpy as np
 from skimage.io import imread
+import os
 
 #Load all pictures in the folder
 def read_img(img_list, img):
@@ -30,6 +31,20 @@ def it_name_extract_labels_from_img(names):
         temp = []
     return plots
 
+def it_name_extract_labels_from_img_jpeg(names):
+    plots = []
+    temp = []
+    for i in range(len(names)):
+        name_t = os.path.basename(names[i])
+        #name_t = name_t.replace(".tif", "")
+        for j in range(1,len(name_t)):
+            if (names[i][-j] == "_"):
+                temp.append(name_t[-(j-1):len(name_t)].replace(".jpeg", ""))
+                break
+        temp.append(name_t.replace("_"+ temp[0] + ".jpeg", ""))
+        plots.append(temp)
+        temp = []
+    return plots
 def save_in_txt(save_array, filename):
     file = open(filename, "w+")
     # Saving the array in a text file
