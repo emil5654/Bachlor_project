@@ -1,19 +1,21 @@
 import numpy as np
 import pandas as pd
  
-def get_labels():
+ 
+def get_labels(bin_size):
     # read by default 1st sheet of an excel file
     dataframe1 =  pd.read_csv('Lodging_scores.csv', parse_dates=['VisualScoreDate','FlightDate'])
     scores = np.array(dataframe1)
     labels = []
-    bin_size = 5
     #create labels, [ROI, Visual SCORE, FLIGHTFolder]
     for i in range(scores.shape[0]):
-        labels.append((scores[i,2], scores[i, 4], scores[i,6], create_bin(bin_size, scores[i,4])-1))
+        labels.append((scores[i,2], scores[i, 4], scores[i,6], create_bin(bin_size, scores[i,4])))
     return labels
 
 def create_bin(bin_size, vision_score):
+    bin_n = np.floor(100/bin_size)
     if (vision_score == 0):
-        return 1
+        return 1.0
+    elif (vision_score == 100):
+        return bin_n
     return  np.ceil(vision_score/bin_size)
-
