@@ -7,9 +7,9 @@ def get_labels(bin_size):
     dataframe1 =  pd.read_csv('Lodging_scores.csv', parse_dates=['VisualScoreDate','FlightDate'])
     scores = np.array(dataframe1)
     labels = []
-    #create labels, [ROI, Visual SCORE, FLIGHTFolder]
+    #create labels, [ROI, Visual SCORE, FLIGHTFolder, BIN]
     for i in range(scores.shape[0]):
-        labels.append((scores[i,2], scores[i, 4], scores[i,6], create_bin(bin_size, scores[i,4])))
+        labels.append((scores[i,2], scores[i, 4], scores[i,6].replace("m","M"), create_bin(bin_size, scores[i,4])))
     return labels
 
 def create_bin(bin_size, vision_score):
