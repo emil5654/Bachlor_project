@@ -13,9 +13,9 @@ def get_labels(bin_size):
     return labels
 
 def create_bin(bin_size, vision_score):
-    bin_n = np.floor(100/bin_size)
+    bin_n = int(np.floor(100/bin_size))
     if (vision_score == 0):
-        return 1.0
+        return 1
     elif (vision_score == 100):
-        return bin_n
-    return  np.ceil(vision_score/bin_size)
+        return bin_n - 1
+    return  int(np.ceil(vision_score/bin_size)-1)

@@ -1,27 +1,4 @@
 import numpy as np # linear algebra
-import json
-from matplotlib import pyplot as plt
-from skimage import color
-from skimage.feature import hog
-from sklearn import svm
-from sklearn.metrics import classification_report,accuracy_score
-
-from skimage.io import imread
-from skimage.transform import resize
-from skimage.feature import hog
-from skimage import exposure
-import matplotlib.pyplot as plt
-import get_lodging_scores
-import cv2  # importing cv
-import imutils
-import glob
-
-#We need these in this file:
-import load_read_name_extractor as lrne
-import os
-import pickle
-
-
 
 def match_pic_label_to_names(features, labels, names):
     n = len(labels)
