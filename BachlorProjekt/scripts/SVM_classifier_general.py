@@ -10,21 +10,7 @@ from sklearn.model_selection import GridSearchCV
 import glob
 import tracemalloc
 
-
 def match_pic_label_to_names(features, labels, names):
-    n = len(labels)
-    m = len(names)
-    data_frame = []
-    error = []
-    for i in range(n):
-        matched = False
-        for j in range(m):
-            if (str(labels[i][0]) == str(names[j][0]) and labels[i][2] == names[j][1]):
-                data_frame.append(j)
-                matched = True
-    return data_frame
-
-def match_pic_label_to_names_old(features, labels, names):
     n = len(labels)
     m = len(names)
     data_frame = []
@@ -35,7 +21,6 @@ def match_pic_label_to_names_old(features, labels, names):
             if (str(labels[i][0]) == str(names[j][0]) and labels[i][2] == names[j][1]):
                 data_frame.append(np.hstack((features[j], labels[i][3])))
                 matched = True
-                break
     return data_frame
 
 #error is images that has no labels
