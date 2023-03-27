@@ -4,12 +4,12 @@ from sklearn import svm
 from sklearn.metrics import classification_report,accuracy_score
 import numpy as np # linear algebra
 import get_lodging_scores
-import load_read_name_extractor as lrne
 import pickle
 from sklearn.metrics import make_scorer
 from sklearn.model_selection import GridSearchCV
 import glob
 import tracemalloc
+
 
 def match_pic_label_to_names(features, labels, names):
     n = len(labels)
@@ -22,7 +22,6 @@ def match_pic_label_to_names(features, labels, names):
             if (str(labels[i][0]) == str(names[j][0]) and labels[i][2] == names[j][1]):
                 data_frame.append(j)
                 matched = True
-                break
     return data_frame
 
 def match_pic_label_to_names_old(features, labels, names):
