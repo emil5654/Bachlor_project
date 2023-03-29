@@ -23,6 +23,32 @@ def match_pic_label_to_names(features, labels, names):
                 matched = True
     return data_frame
 
+def match_pic_label_to_names_new(features, labels, names):
+    n = len(labels)
+    m = len(names)
+    error = []
+    for i in range(n):
+        matched = False
+        for j in range(m):
+            if (str(labels[i][0]) == str(names[j][0]) and labels[i][2] == names[j][1]):
+                features[j].append(labels[i][3])
+                matched = True
+    return features
+    
+def match_pic_label_to_names_new_2(features, labels, names):
+    n = len(labels)
+    m = len(names)
+    data_frame = []
+    error = []
+    for i in range(n):
+        matched = False
+        for j in range(m):
+            if (str(labels[i][0]) == str(names[j][0]) and labels[i][2] == names[j][1]):
+                data_frame.append(j)
+                matched = True
+    return data_frame
+
+
 #error is images that has no labels
 def match_pic_names_to_label(features, labels, names):
     m = len(labels)
@@ -38,3 +64,39 @@ def match_pic_names_to_label(features, labels, names):
         if (matched == False):
             error.append((names[i]))
     return data_frame, error
+
+def save_results(results, path):
+    path = path.replace("Features\\", "")
+    path = "results/" + path.replace(".npy", ".txt")
+    with open(path, 'a') as f:
+        f.write(results)
+        f.write("\n")
+    print("Results Saved Succesfull")
+
+def load_labels(bin_size):
+    labels = get_lodging_scores.get_labels(bin_size)
+    #COnverts into set (no dublicates in set)
+    my_set = set(map(tuple, labels))
+    # convert set back to list of arrays
+    labels = list(map(np.array, my_set))
+    return labels
+
+def partition_data(data_frame, percentage):
+    partition = int(len(data_frame)*percentage/100)
+    x_train, x_test = data_frame[:partition,:-1],  data_frame[partition:,:-1]
+    y_train, y_test = data_frame[:partition,-1:].ravel() , data_frame[partition:,-1:].ravel()
+    print("Data Partioned Succesfull")
+    return x_train, x_test, y_train, y_test
+
+def partition_data_list(data_frame, percentage):
+    partition = int(len(data_frame) * percentage / 100)
+    x_train, x_test = [row[:-1] for row in data_frame[:partition]], [row[:-1] for row in data_frame[partition:]]
+    y_train, y_test = [row[-1] for row in data_frame[:partition]], [row[-1] for row in data_frame[partition:]]
+    print("Data Partitioned Successfully")
+    return x_train, x_test, y_train, y_test
+
+def save_model(clf, filename):
+    filename = filename.replace("Features\\", "")
+    filename = "model/" + filename.replace(".npy", ".sav")
+    pickle.dump(clf, open(filename, 'wb'))
+    print("Model Saved Succesfull")
