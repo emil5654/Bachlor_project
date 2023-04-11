@@ -26,5 +26,13 @@ def get_dates_and_labes(bin_size):
     labels = []
     #create labels, [ROI, Visual SCORE, FLIGHTFolder, BIN]
     for i in range(scores.shape[0]):
-        labels.append((scores[i,2], scores[i, 4], scores[i,6].replace("m","M"), create_bin(bin_size, scores[i,4])))
+        date = timestamp_to_int(scores[i, 3])
+        labels.append((scores[i,2], scores[i, 4], scores[i,6].replace("m","M"), create_bin(bin_size, scores[i,4]), date))
     return labels
+
+def timestamp_to_int(timestamp: pd.Timestamp) -> int:
+    """Convert a pandas Timestamp to an integer between 0 and 365."""
+    date_obj = timestamp.date()
+    start_date = date(date_obj.year, 1, 1)
+    delta = date_obj - start_date
+    return delta.days
