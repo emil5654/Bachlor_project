@@ -19,3 +19,12 @@ def create_bin(bin_size, vision_score):
     elif (vision_score == 100):
         return bin_n - 1
     return  int(np.ceil(vision_score/bin_size)-1)
+
+def get_dates_and_labes(bin_size):
+    dataframe1 =  pd.read_csv('Lodging_scores.csv', parse_dates=['VisualScoreDate','FlightDate'])
+    scores = np.array(dataframe1)
+    labels = []
+    #create labels, [ROI, Visual SCORE, FLIGHTFolder, BIN]
+    for i in range(scores.shape[0]):
+        labels.append((scores[i,2], scores[i, 4], scores[i,6].replace("m","M"), create_bin(bin_size, scores[i,4])))
+    return labels
