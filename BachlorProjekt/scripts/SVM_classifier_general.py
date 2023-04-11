@@ -57,7 +57,7 @@ def match_pic_names_to_label(features, labels, names):
     return data_frame, error
 
 def save_results(results, path):
-    path = path.replace("Features\\", "")
+    path = path.replace("Features/", "")
     path = "results/" + path.replace(".npy", ".txt")
     with open(path, 'a') as f:
         f.write(results)
