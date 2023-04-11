@@ -23,31 +23,22 @@ def match_pic_label_to_names(features, labels, names):
                 matched = True
     return data_frame
 
-def match_pic_label_to_names_new(features, labels, names):
+def match_pic_label_to_names_new(features, labels, names, date_):
     n = len(labels)
     m = len(names)
     error = []
     for i in range(n):
         matched = False
         for j in range(m):
-            if (str(labels[i][0]) == str(names[j][0]) and labels[i][2] == names[j][1]):
-                features[j].append(labels[i][3])
-                matched = True
+            if (date_ == True):
+                if (str(labels[i][0]) == str(names[j][0]) and labels[i][2] == names[j][1]):
+                    features[j].append(labels[i][4], labels[i][3])
+                    matched = True
+            else:
+                if (str(labels[i][0]) == str(names[j][0]) and labels[i][2] == names[j][1]):
+                    features[j].append(labels[i][3])
+                    matched = True
     return features
-    
-def match_pic_label_to_names_new_2(features, labels, names):
-    n = len(labels)
-    m = len(names)
-    data_frame = []
-    error = []
-    for i in range(n):
-        matched = False
-        for j in range(m):
-            if (str(labels[i][0]) == str(names[j][0]) and labels[i][2] == names[j][1]):
-                data_frame.append(j)
-                matched = True
-    return data_frame
-
 
 #error is images that has no labels
 def match_pic_names_to_label(features, labels, names):
