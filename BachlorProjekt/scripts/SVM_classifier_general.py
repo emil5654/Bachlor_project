@@ -96,7 +96,6 @@ def partition_data_list(data_frame, percentage):
     return x_train, x_test, y_train, y_test
 
 def save_model(clf, filename):
-    filename = filename.replace("Features\\", "")
     filename = "model/" + filename.replace(".npy", ".sav")
     pickle.dump(clf, open(filename, 'wb'))
     print("Model Saved Succesfull")
