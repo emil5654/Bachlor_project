@@ -1,3 +1,4 @@
 BachlorProjekt/scripts/features/*.npy
 BachlorProjekt/scripts/model/*.sav
 BachlorProjekt/scripts/names/*.npy
+__pycache__/
