@@ -2,7 +2,6 @@ import numpy as np
 import pandas as pd
 from datetime import date
  
- 
 def get_labels(bin_size):
     # read by default 1st sheet of an excel file
     dataframe1 =  pd.read_csv('Lodging_scores.csv', parse_dates=['VisualScoreDate','FlightDate'])

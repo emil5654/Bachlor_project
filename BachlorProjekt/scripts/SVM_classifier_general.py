@@ -25,14 +25,15 @@ def match_pic_label_to_names(features, labels, names):
 
 def match_pic_label_to_names_new(features, labels, names, date_):
     n = len(labels)
-    m = len(names)
+    m = len(names) 
     error = []
     for i in range(n):
         matched = False
         for j in range(m):
             if (date_ == True):
                 if (str(labels[i][0]) == str(names[j][0]) and labels[i][2] == names[j][1]):
-                    features[j].append(labels[i][4], labels[i][3])
+                    features[j].append(labels[i][4])
+                    features[j].append(labels[i][3])
                     matched = True
             else:
                 if (str(labels[i][0]) == str(names[j][0]) and labels[i][2] == names[j][1]):
@@ -64,8 +65,11 @@ def save_results(results, path):
         f.write("\n")
     print("Results Saved Succesfull")
 
-def load_labels(bin_size):
-    labels = get_lodging_scores.get_labels(bin_size)
+def load_labels(bin_size, date_):
+    if (date_ == True):
+        labels = get_lodging_scores.get_dates_and_labes(bin_size)
+    else:
+        labels = get_lodging_scores.get_labels(bin_size)
     #COnverts into set (no dublicates in set)
     my_set = set(map(tuple, labels))
     # convert set back to list of arrays
