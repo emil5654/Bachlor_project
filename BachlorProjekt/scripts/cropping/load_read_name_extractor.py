@@ -21,7 +21,7 @@ def it_name_extract_labels_from_img(names):
         name_t = names[i]
         #name_t = name_t.replace(".tif", "")
         for j in range(len(names[i])):
-            if (names[i][j] == "\\"):
+            if (names[i][j] == "/"):
                 temp.append(name_t[0:j])
         for j in range(1,len(name_t)):
             if (names[i][-j] == "_"):
