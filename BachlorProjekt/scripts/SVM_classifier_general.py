@@ -31,12 +31,12 @@ def match_pic_label_to_names_new(features, labels, names, date_):
         matched = False
         for j in range(m):
             if (date_ == True):
-                if (str(labels[i][0]) == str(names[j][0]) and labels[i][2] == names[j][1]):
+                if (str(labels[i][0]) == str(names[j][1]) and labels[i][2] == names[j][0]):
                     features[j].append(labels[i][4])
                     features[j].append(labels[i][3])
                     matched = True
             else:
-                if (str(labels[i][0]) == str(names[j][0]) and labels[i][2] == names[j][1]):
+                if (str(labels[i][0]) == str(names[j][1]) and labels[i][2] == names[j][0]):
                     features[j].append(labels[i][3])
                     matched = True
     return features

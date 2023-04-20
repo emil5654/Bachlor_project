@@ -13,12 +13,12 @@ def get_labels(bin_size):
     return labels
 
 def create_bin(bin_size, vision_score):
-    bin_n = int(np.floor(100/bin_size))
-    if (vision_score == 0):
-        return 1
-    elif (vision_score == 100):
-        return bin_n - 1
-    return  int(np.ceil(vision_score/bin_size)-1)
+    bin_num = int(vision_score // bin_size)
+    if (vision_score == 99 and bin_size == 33):
+        return 2
+    if (vision_score == 100):
+        return bin_num - 1
+    return bin_num
 
 def get_dates_and_labes(bin_size):
     dataframe1 =  pd.read_csv('Lodging_scores.csv', parse_dates=['VisualScoreDate','FlightDate'])
