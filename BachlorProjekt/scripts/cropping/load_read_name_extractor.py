@@ -36,6 +36,8 @@ def it_name_extract_labels_from_img_jpeg(names):
     temp = []
     
     for i in range(len(names)):
+        t0=0
+        t1=0
         name_t = os.path.basename(names[i])
         _counter = 0
         #name_t = name_t.replace(".tif", "")
@@ -44,12 +46,17 @@ def it_name_extract_labels_from_img_jpeg(names):
                 if (_counter == 1):
                     temp.append(name_t[-(j-1):len(name_t)].replace(".jpeg", ""))
                     break
-                _counter = _counter +1                
+                _counter = _counter +1 
         temp.append(name_t.replace("_"+ temp[0] + ".jpeg", ""))
+        t0 = temp[0]
+        t1= temp[1]
+        
+        temp[0] = t1
+        temp[1] = t0
+        
         plots.append(temp)
         temp = []
     return plots
-
 def save_in_txt(save_array, filename):
     file = open(filename, "w+")
     # Saving the array in a text file
