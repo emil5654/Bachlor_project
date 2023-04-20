@@ -41,6 +41,33 @@ def match_pic_label_to_names_new(features, labels, names, date_):
                     matched = True
     return features
 
+def match_pic_label_to_names_one_year(features, labels, names, date_):
+    n = len(labels) 
+    m = len(names) 
+    validation = []
+    training = []
+    for i in range(n):
+        for j in range(m):
+            if (date_ == True):
+                if (str(labels[i][0]) == str(names[j][0]) and labels[i][2] == names[j][1]):
+                    if(names[j][1][0] == '1' and names[j][1][1] == '9'):
+                        features[j].append(labels[i][3])
+                        validation.append(features[j])
+                    else:
+                        features[j].append(labels[i][3])
+                        training.append(features[j])
+            else:
+                if (str(labels[i][0]) == str(names[j][0]) and labels[i][2] == names[j][1]):
+                    if(names[j][1][0] == '1' and names[j][1][1] == '9'):
+                        features[j].append(labels[i][3])
+                        validation.append(features[j])
+                    else:
+                        features[j].append(labels[i][3])
+                        training.append(features[j])
+                    
+    
+    return training, validation 
+
 #error is images that has no labels
 def match_pic_names_to_label(features, labels, names):
     m = len(labels)
@@ -80,13 +107,25 @@ def partition_data(data_frame, percentage):
     partition = int(len(data_frame)*percentage/100)
     x_train, x_test = data_frame[:partition,:-1],  data_frame[partition:,:-1]
     y_train, y_test = data_frame[:partition,-1:].ravel() , data_frame[partition:,-1:].ravel()
+    print(x_train)
     print("Data Partioned Succesfull")
     return x_train, x_test, y_train, y_test
+    
 
 def partition_data_list(data_frame, percentage):
     partition = int(len(data_frame) * percentage / 100)
     x_train, x_test = [row[:-1] for row in data_frame[:partition]], [row[:-1] for row in data_frame[partition:]]
     y_train, y_test = [row[-1] for row in data_frame[:partition]], [row[-1] for row in data_frame[partition:]]
+    print("Data Partitioned Successfully")
+    return x_train, x_test, y_train, y_test
+
+#x_train takes everything but the last row
+def partition_data_list_year(validation, train):
+    if (validation is None or train is None):
+        print("Error: validation or train is None")
+        return None
+    x_train, x_test = [row[:-1] for row in train], [row[:-1] for row in validation]
+    y_train, y_test = [row[-1] for row in train], [row[-1] for row in validation]
     print("Data Partitioned Successfully")
     return x_train, x_test, y_train, y_test
 
