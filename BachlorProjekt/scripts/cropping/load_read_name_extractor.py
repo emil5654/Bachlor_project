@@ -62,6 +62,8 @@ def save_in_txt(save_array, filename):
     # Saving the array in a text file
     np.save(filename, save_array)
     file.close()
+    
+
 
 def it_name_extract_labels_from_img_jpeg_old(names):
     plots = []
