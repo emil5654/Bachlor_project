@@ -1,4 +1,4 @@
-import numpy as np # linear algebra
+import numpy as np
 import pandas as pd
 from sklearn import svm
 from sklearn.metrics import classification_report,accuracy_score
@@ -8,7 +8,6 @@ import pickle
 from sklearn.metrics import make_scorer
 from sklearn.model_selection import GridSearchCV
 import glob
-import tracemalloc
 
 def match_pic_label_to_names(features, labels, names):
     n = len(labels)
