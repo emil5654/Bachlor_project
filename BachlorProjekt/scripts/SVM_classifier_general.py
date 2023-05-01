@@ -132,3 +132,14 @@ def save_model(clf, filename):
     filename = "model/" + filename.replace(".npy", ".sav")
     pickle.dump(clf, open(filename, 'wb'))
     print("Model Saved Succesfull")
+    
+def create_conf_matrix(y_test, y_pred, n_bins):
+    conf_matrix = [[0 for j in range(n_bins)] for i in range(n_bins)]
+    for i in range(len(y_test)):
+        conf_matrix[int(y_test[i])][int(y_pred[i])] += 1
+    
+    matrix_string = ""
+    for row in conf_matrix:
+        row_string = " ".join(str(element) for element in row)
+        matrix_string += row_string + "\n"
+    return matrix_string
