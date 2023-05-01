@@ -16,6 +16,8 @@ def create_bin(bin_size, vision_score):
     bin_num = int(vision_score // bin_size)
     if (vision_score == 99 and bin_size == 33):
         return 2
+    if (vision_score == 100 and bin_size == 1):
+        return bin_num
     if (vision_score == 100):
         return bin_num - 1
     return bin_num
@@ -36,3 +38,9 @@ def timestamp_to_int(timestamp: pd.Timestamp) -> int:
     start_date = date(date_obj.year, 1, 1)
     delta = date_obj - start_date
     return delta.days
+
+def it_bin(scores, bin_size):
+    bins = []
+    for i in range(len(scores)):
+        bins.append(create_bin(bin_size, scores[i]))
+    return bins
